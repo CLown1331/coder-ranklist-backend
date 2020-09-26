@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const coderService = require('../../services/coder.service');
+const coderQueue = require('./../../queue/coder.queue');
 
 router.use((req, res, next) => {
     next();
@@ -22,6 +23,7 @@ router.post('/upsert', async (req, res) => {
         return;
     }
     await coderService.Upsert(id, payload);
+    coderQueue.add({Id: id});
     res.status(200).send();
 });
 

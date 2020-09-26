@@ -6,6 +6,11 @@ const bodyParser = require('body-parser');
 const cors = require('cors')
 const port = process.env.PORT || 8080;
 
+const coderQueue = require('./queue/coder.queue');
+const coderJob = require('./jobs/coder.job');
+
+coderQueue.process(coderJob);
+
 const api = require('./api/api');
 
 const app = express();
