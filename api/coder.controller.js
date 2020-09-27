@@ -24,7 +24,7 @@ router.post('/upsert', async (req, res) => {
     }
     await coderService.Upsert(id, payload);
     coderQueue.add({Id: id});
-    res.status(200).send();
+    res.status(200).json(payload);
 });
 
 module.exports = router;
