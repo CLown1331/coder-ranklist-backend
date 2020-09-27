@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const coderService = require('../../services/coder.service');
-const coderQueue = require('./../../queue/coder.queue');
+const coderService = require('../services/coder.service');
+const coderQueue = require('./../queue/coder.queue');
 
 router.use((req, res, next) => {
     next();

@@ -21,7 +21,7 @@ const GetRanklist = () => {
                 logger.error(err);
                 reject(err);
             }
-            const ranklist = Object.values(res);
+            const ranklist = Object.values(res).map(u => JSON.parse(u));
             logger.info(ranklist);
             resolve(ranklist);
         })
