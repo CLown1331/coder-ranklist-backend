@@ -23,7 +23,7 @@ router.post('/upsert', async (req, res) => {
         return;
     }
     await coderService.Upsert(id, payload);
-    coderQueue.add({Id: id});
+    coderQueue.add({Id: id}, {}, {removeOnComplete: true, removeOnFail: true, attempts: 3, backoff: {type: 'exponential', delay: 1000}});
     res.status(200).json(payload);
 });
 
