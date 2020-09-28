@@ -15,6 +15,10 @@ const GetCoderInfo = async (id) => {
     return coderCollection.findById(id);
 }
 
+const GetCoders = async () => {
+    return coderCollection.find();
+}
+
 const GetUserInfo = async (handle, judge) => {
     let url = '';
     if (judge === 'codeforces') {
@@ -58,4 +62,5 @@ module.exports = {
     Upsert,
     GetUserPoints,
     GetCoderInfo,
+    GetCoders
 }
