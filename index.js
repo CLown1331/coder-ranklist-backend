@@ -9,6 +9,7 @@ const port = process.env.PORT || 8080;
 const coderQueue = require('./queue/coder.queue');
 const coderJob = require('./jobs/coder.job');
 const allowedOriginService = require('./services/allowedOrigin.service');
+const ratingFormulaService = require('./services/ratingFormula.service');
 coderQueue.process(coderJob);
 
 const api = require('./api/api');
