@@ -14,7 +14,12 @@ router.post('/login', async (req, res) => {
             Message: 'Email or Password invalid',
         });
     } else {
-        res.status(200).json(authService.IssueToken(email));
+        const tokenResponse = authService.IssueToken(email);
+        res.cookie('token', tokenResponse.access_token, {
+            maxAge: process.env.COOKIE_EXPIRES_IN,
+            httpOnly: true
+        });
+        res.status(200).json(tokenResponse);
     }
 });
 
