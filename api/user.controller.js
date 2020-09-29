@@ -15,10 +15,19 @@ router.post('/login', async (req, res) => {
         });
     } else {
         const tokenResponse = authService.IssueToken(email);
-        res.cookie('token', tokenResponse.access_token, {
-            maxAge: process.env.COOKIE_EXPIRES_IN,
-            httpOnly: true
-        });
+        const origin = req.get('origin');
+        if (!!origin) {
+            const domain = origin
+                .replace('http://', '')
+                .replace('https://')
+                .replace(/:.*$/g, '')
+                .replace(/^([^.]+)\./g, '');
+            res.cookie('token', tokenResponse.access_token, {
+                maxAge: tokenResponse.expires * 1000,
+                httpOnly: true,
+                domain: domain
+            });
+        }
         res.status(200).json(tokenResponse);
     }
 });

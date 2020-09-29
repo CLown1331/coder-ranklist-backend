@@ -4,6 +4,7 @@ const ranklistService = require('../services/ranklist.service');
 const coderService = require('../services/coder.service');
 const coderQueue = require('./../queue/coder.queue');
 const logger = require('./../logger');
+const passport = require('./../passport/passport');
 
 router.use((req, res, next) => {
     next();
@@ -14,7 +15,7 @@ router.get('/', async (req, res) => {
     res.status(200).json(ranklist);
 });
 
-router.post('/update', async (req, res) => {
+router.post('/update', passport.authenticate('jwt', { session: false }), async (req, res) => {
     logger.info('Updating ranklist');
     const coders = await coderService.GetCoders();
     coders.forEach((c) => {

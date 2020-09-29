@@ -2,12 +2,13 @@ const express = require('express');
 const router = express.Router();
 const coderService = require('../services/coder.service');
 const coderQueue = require('./../queue/coder.queue');
+const passport = require('./../passport/passport');
 
 router.use((req, res, next) => {
     next();
 });
 
-router.post('/upsert', async (req, res) => {
+router.post('/upsert', passport.authenticate('jwt', { session: false }), async (req, res) => {
     const id = req.body.Id;
     const payload = req.body.Payload;
     if (!id) {
