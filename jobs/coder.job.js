@@ -16,7 +16,7 @@ module.exports = async (job) => {
         coder.CodeChefRating = await coderService.GetUserPoints(coder.CodeChef, 'codechef');
     }
     
-    coder.rating = eval(astFormula, {CFR: coder.CodeforcesRating || 0, CCR: coder.CodeChefRating || 0, CP: coder.Marks || 0});
+    coder.Rating = eval(astFormula, {CFR: coder.CodeforcesRating || 0, CCR: coder.CodeChefRating || 0, CP: coder.Marks || 0});
     
     logger.info(coder);
     
